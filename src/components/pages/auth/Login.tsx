@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { login } from "api/auth";
 import getErrorMessage from "utils/error";
@@ -15,6 +16,8 @@ interface InputErrorState {
 }
 
 function Login() {
+  const navigate = useNavigate();
+
   const [showModal, setShowModal] = useState<boolean>(false);
   const [modalContent, setModalContent] = useState<string>("");
 
@@ -27,6 +30,10 @@ function Login() {
     emailError: false,
     passwordError: false,
   });
+
+  const goMain = () => {
+    navigate("/");
+  };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
@@ -111,6 +118,7 @@ function Login() {
         showModal={showModal}
         setShowModal={setShowModal}
         content={modalContent}
+        action={goMain}
       />
     </div>
   );

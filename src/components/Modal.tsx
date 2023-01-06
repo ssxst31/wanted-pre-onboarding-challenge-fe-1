@@ -19,7 +19,13 @@ export default function Modal({
   };
 
   const actionFilter = (action: (() => void) | undefined) => {
-    if (content === "계정이 성공적으로 생성되었습니다" && action) {
+    if (
+      [
+        "계정이 성공적으로 생성되었습니다",
+        "성공적으로 로그인 했습니다",
+      ].includes(content) &&
+      action
+    ) {
       return action();
     } else {
       closeModal();

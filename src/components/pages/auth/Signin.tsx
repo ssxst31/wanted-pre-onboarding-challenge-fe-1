@@ -4,6 +4,7 @@ import { signup } from "api/auth";
 import getErrorMessage from "utils/error";
 import Modal from "components/Modal";
 import { useNavigate } from "react-router-dom";
+
 interface inputState {
   email: string;
   password: string;
@@ -18,8 +19,8 @@ interface InputErrorState {
 function Signin() {
   const navigate = useNavigate();
 
-  const goMain = () => {
-    navigate("/");
+  const goAuth = () => {
+    navigate("/auth");
   };
 
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -139,7 +140,7 @@ function Signin() {
         showModal={showModal}
         setShowModal={setShowModal}
         content={modalContent}
-        action={goMain}
+        action={goAuth}
       />
     </div>
   );
