@@ -102,6 +102,7 @@ function Login() {
         name="password"
         value={inputs.password}
         onBlur={checkPassword}
+        type="password"
       />
       {inputsError.passwordError && (
         <span className="text-sm text-red-600" style={{ marginTop: 4 }}>

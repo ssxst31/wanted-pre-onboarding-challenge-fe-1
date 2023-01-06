@@ -111,6 +111,7 @@ function Signin() {
         name="password"
         value={inputs.password}
         onBlur={checkPassword}
+        type="password"
       />
       {inputsError.passwordError && (
         <span className="text-sm text-red-600" style={{ marginTop: 4 }}>
@@ -124,6 +125,7 @@ function Signin() {
         name="checkPassword"
         value={inputs.checkPassword}
         onBlur={checkCheckPassword}
+        type="password"
       />
       {inputsError.checkPasswordError && (
         <span className="text-sm text-red-600" style={{ marginTop: 4 }}>
