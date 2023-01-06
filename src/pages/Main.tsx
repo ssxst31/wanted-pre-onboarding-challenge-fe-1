@@ -1,38 +1,36 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import Todo from "components/pages/main/Todo";
+import Todos from "components/pages/main/Todos";
 import DetailTodo from "components/pages/main/DetailTodo";
 import useTodo from "hooks/useTodo";
 
-function Main() {
+interface MainProps {
+  isLogin: string | null;
+}
+
+function Main({ isLogin }: MainProps) {
   const navigate = useNavigate();
   const { todos, deleteTodo, createTodo, updateTodo } = useTodo();
-
-  const [isLogin, setIsLogin] = useState<string | null>(
-    window.localStorage.getItem("token")
-  );
 
   const goAuth = () => {
     navigate(`/auth`);
   };
 
-  const signout = () => {
-    window.localStorage.removeItem("token");
-    setIsLogin(null);
-    navigate(`/`);
-  };
-
   return isLogin ? (
-    <div className="flex justify-between">
-      <Todo
+    <div
+      className="absolute flex justify-center w-2/3 transform top-1/2 left-1/2"
+      style={{
+        transform: "translate(-50%, -50%)",
+      }}
+    >
+      <Todos
         todos={todos}
         deleteTodo={deleteTodo}
         createTodo={createTodo}
         updateTodo={updateTodo}
       />
       <DetailTodo todos={todos} />
-      <div onClick={signout}>로그아웃</div>
     </div>
   ) : (
     <div

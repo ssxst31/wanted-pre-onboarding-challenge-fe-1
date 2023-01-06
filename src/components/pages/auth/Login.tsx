@@ -15,7 +15,11 @@ interface InputErrorState {
   passwordError: boolean;
 }
 
-function Login() {
+interface LoginProps {
+  setIsLogin: React.Dispatch<React.SetStateAction<string | null>>;
+}
+
+function Login({ setIsLogin }: LoginProps) {
   const navigate = useNavigate();
 
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -52,7 +56,7 @@ function Login() {
 
         setShowModal(true);
         setModalContent(res.message);
-
+        setIsLogin(res.token);
         window.localStorage.setItem("token", res.token);
       } catch (error) {
         const errorMessage = getErrorMessage(error);

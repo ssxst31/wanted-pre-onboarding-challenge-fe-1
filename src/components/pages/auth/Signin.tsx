@@ -17,10 +17,8 @@ interface InputErrorState {
 }
 
 function Signin() {
-  const navigate = useNavigate();
-
   const goAuth = () => {
-    navigate("/auth");
+    window.location.replace("/auth");
   };
 
   const [showModal, setShowModal] = useState<boolean>(false);

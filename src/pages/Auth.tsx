@@ -4,7 +4,11 @@ import { Tab } from "@headlessui/react";
 import Login from "components/pages/auth/Login";
 import Signin from "components/pages/auth/Signin";
 
-function Auth() {
+interface AuthProps {
+  setIsLogin: React.Dispatch<React.SetStateAction<string | null>>;
+}
+
+function Auth({ setIsLogin }: AuthProps) {
   return (
     <div
       className="absolute transform w-96 top-1/2 left-1/2"
@@ -31,7 +35,7 @@ function Auth() {
         </Tab.List>
         <Tab.Panels>
           <Tab.Panel className="flex flex-col">
-            <Login />
+            <Login setIsLogin={setIsLogin} />
           </Tab.Panel>
           <Tab.Panel className="flex flex-col">
             <Signin />

@@ -18,7 +18,7 @@ interface TodoProps {
   }) => void;
 }
 
-function Todo({ todos, deleteTodo, createTodo, updateTodo }: TodoProps) {
+function Todos({ todos, deleteTodo, createTodo, updateTodo }: TodoProps) {
   const navigate = useNavigate();
   const [showCreateModal, setShowCreateModal] = useState<boolean>(false);
   const [ModalType, setModalType] = useState<string>("");
@@ -35,15 +35,16 @@ function Todo({ todos, deleteTodo, createTodo, updateTodo }: TodoProps) {
   return (
     <>
       <div>
-        <div
+        <button
+          className="w-full h-12 text-white bg-indigo-500 rounded-md hover:bg-indigo-700"
           onClick={() => {
             setShowCreateModal(true);
             setModalType("create");
           }}
         >
           추가하기
-        </div>
-        <ul>
+        </button>
+        <ul className="overflow-scroll h-96">
           {todos.map((todo) => {
             return (
               <li
@@ -114,4 +115,4 @@ function Todo({ todos, deleteTodo, createTodo, updateTodo }: TodoProps) {
   );
 }
 
-export default Todo;
+export default Todos;

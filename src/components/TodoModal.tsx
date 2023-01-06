@@ -78,14 +78,14 @@ function CreateTodoModal({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-md p-6 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+              <Dialog.Panel className="w-full max-w-md p-6 space-y-5 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                 <Dialog.Title
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900"
                 >
                   할 일 {isCreateType ? "추가하기" : "수정하기"}
                 </Dialog.Title>
-                <div className="flex flex-col">
+                <div className="flex flex-col space-y-5">
                   <input
                     placeholder="제목"
                     className="px-2 py-3 border border-gray-300 rounded-md focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
