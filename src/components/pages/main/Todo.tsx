@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import CreateTodoModal from "components/CreateTodoModal";
 import useTodo from "hooks/useTodo";
+import CreateTodoModal from "components/CreateTodoModal";
 
 function Todo({ setIsLogin }: any) {
   const [showCreateModal, setShowCreateModal] = useState(false);

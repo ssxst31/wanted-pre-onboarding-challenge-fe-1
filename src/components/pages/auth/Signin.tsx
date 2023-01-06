@@ -1,9 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { signup } from "api/auth";
 import getErrorMessage from "utils/error";
 import Modal from "components/Modal";
-import { useNavigate } from "react-router-dom";
 
 interface inputState {
   email: string;
