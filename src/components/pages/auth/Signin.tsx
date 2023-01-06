@@ -2,7 +2,8 @@ import React, { useState } from "react";
 
 import { signup } from "api/auth";
 import getErrorMessage from "utils/error";
-
+import Modal from "components/Modal";
+import { useNavigate } from "react-router-dom";
 interface inputState {
   email: string;
   password: string;
@@ -15,6 +16,15 @@ interface InputErrorState {
 }
 
 function Signin() {
+  const navigate = useNavigate();
+
+  const goMain = () => {
+    navigate("/");
+  };
+
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [modalContent, setModalContent] = useState<string>("");
+
   const [inputs, setInputs] = useState<inputState>({
     email: "",
     password: "",
@@ -42,14 +52,17 @@ function Signin() {
       try {
         const res = await signup({ email, password });
 
-        alert(res.message);
+        setShowModal(true);
+        setModalContent(res.message);
       } catch (error) {
         const errorMessage = getErrorMessage(error);
 
-        alert(errorMessage.response.data.details);
+        setShowModal(true);
+        setModalContent(errorMessage.response.data.details);
       }
     } else {
-      alert("다시 확인해주세요.");
+      setShowModal(true);
+      setModalContent("다시 확인해주세요.");
     }
   };
 
@@ -73,7 +86,6 @@ function Signin() {
     const checkPwValid = inputs.password !== inputs.checkPassword;
 
     setInputsError({ ...inputsError, checkPasswordError: checkPwValid });
-    console.log(inputsError.checkPasswordError);
   };
 
   return (
@@ -123,6 +135,12 @@ function Signin() {
       >
         회원가입
       </button>
+      <Modal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        content={modalContent}
+        action={goMain}
+      />
     </div>
   );
 }

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import { login } from "api/auth";
 import getErrorMessage from "utils/error";
+import Modal from "components/Modal";
 
 interface InputState {
   email: string;
@@ -14,6 +15,9 @@ interface InputErrorState {
 }
 
 function Login() {
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [modalContent, setModalContent] = useState<string>("");
+
   const [inputs, setInputs] = useState<InputState>({
     email: "",
     password: "",
@@ -39,16 +43,19 @@ function Login() {
       try {
         const res = await login({ email, password });
 
-        alert(res.message);
+        setShowModal(true);
+        setModalContent(res.message);
 
         window.localStorage.setItem("token", res.token);
       } catch (error) {
         const errorMessage = getErrorMessage(error);
 
-        alert(errorMessage.response.data.details);
+        setShowModal(true);
+        setModalContent(errorMessage.response.data.details);
       }
     } else {
-      alert("다시 확인해주세요.");
+      setShowModal(true);
+      setModalContent("다시 확인해주세요.");
     }
   };
   const checkEmail = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -100,6 +107,11 @@ function Login() {
       >
         로그인
       </button>
+      <Modal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        content={modalContent}
+      />
     </div>
   );
 }
