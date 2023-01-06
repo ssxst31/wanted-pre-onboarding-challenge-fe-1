@@ -5,7 +5,7 @@ import TodoModal from "components/TodoModal";
 import { Todo } from "type";
 interface TodoProps {
   todos: Todo[] | null | undefined;
-  deleteTodo: (id: number) => void;
+  deleteTodo: (id: string) => void;
   createTodo: ({ title, content }: { title: string; content: string }) => void;
   updateTodo: ({
     id,
@@ -20,9 +20,13 @@ interface TodoProps {
 
 function Todo({ todos, deleteTodo, createTodo, updateTodo }: TodoProps) {
   const navigate = useNavigate();
-  const [showCreateModal, setShowCreateModal] = useState(false);
-  const [ModalType, setModalType] = useState("");
-  const [inputs, setInputs] = useState({ id: 0, title: "", content: "" });
+  const [showCreateModal, setShowCreateModal] = useState<boolean>(false);
+  const [ModalType, setModalType] = useState<string>("");
+  const [inputs, setInputs] = useState<{
+    id: string;
+    title: string;
+    content: string;
+  }>({ id: "", title: "", content: "" });
 
   if (!todos) {
     return <></>;

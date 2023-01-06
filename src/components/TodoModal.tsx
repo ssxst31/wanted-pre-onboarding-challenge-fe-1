@@ -110,7 +110,7 @@ function CreateTodoModal({
                       isCreateType
                         ? createTodo({ title, content })
                         : updateTodo({ id, title, content });
-                      setInputs({ id: 0, title: "", content: "" });
+                      setInputs({ id: "", title: "", content: "" });
                     }}
                   >
                     {isCreateType ? "추가하기" : "수정하기"}

@@ -6,7 +6,7 @@ import { Todo } from "type";
 function useTodo(): {
   todos: Todo[] | null | undefined;
   createTodo: ({ title, content }: { title: string; content: string }) => void;
-  deleteTodo: (id: number) => void;
+  deleteTodo: (id: string) => void;
   updateTodo: ({
     id,
     title,
@@ -40,7 +40,7 @@ function useTodo(): {
     });
   };
 
-  const deleteTodo = (id: number) => {
+  const deleteTodo = (id: string) => {
     todoApi.deleteTodo({ id }).then(() => {
       loadTodo();
       alert("성공적으로 삭제되었습니다.");
