@@ -6,15 +6,23 @@ import useTodo from "hooks/useTodo";
 interface CreateTodoModalProps {
   showCreateModal: any;
   setShowCreateModal: any;
+  inputs: any;
+  setInputs: any;
   createTodo: any;
+  updateTodo: any;
+  type: string;
 }
 
 function CreateTodoModal({
   showCreateModal,
   setShowCreateModal,
+  inputs,
+  setInputs,
   createTodo,
+  updateTodo,
+  type,
 }: CreateTodoModalProps) {
-  const [inputs, setInputs] = useState({ title: "", content: "" });
+  const isCreateType = type === "create";
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
@@ -59,7 +67,7 @@ function CreateTodoModal({
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900"
                 >
-                  할 일 추가하기
+                  할 일 {isCreateType ? "추가하기" : "수정하기"}
                 </Dialog.Title>
                 <div className="flex flex-col">
                   <input
@@ -82,12 +90,14 @@ function CreateTodoModal({
                     type="button"
                     className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                     onClick={() => {
-                      const { title, content } = inputs;
-                      createTodo({ title, content });
+                      const { id, title, content } = inputs;
+                      isCreateType
+                        ? createTodo({ title, content })
+                        : updateTodo({ id, title, content });
                       setInputs({ title: "", content: "" });
                     }}
                   >
-                    추가하기
+                    {isCreateType ? "추가하기" : "수정하기"}
                   </button>
                 </div>
               </Dialog.Panel>

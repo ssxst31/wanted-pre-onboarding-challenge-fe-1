@@ -27,7 +27,14 @@ function useTodo() {
     });
   };
 
-  return { todos, createTodo, deleteTodo };
+  const updateTodo = ({ id, title, content }: any) => {
+    todoApi.updateTodo({ id, title, content }).then(() => {
+      loadTodo();
+      alert("성공적으로 수정되었습니다.");
+    });
+  };
+
+  return { todos, createTodo, deleteTodo, updateTodo };
 }
 
 export default useTodo;

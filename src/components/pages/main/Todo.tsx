@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 
 import useTodo from "hooks/useTodo";
-import CreateTodoModal from "components/CreateTodoModal";
+import TodoModal from "components/TodoModal";
 
 function Todo({ setIsLogin }: any) {
   const [showCreateModal, setShowCreateModal] = useState(false);
-
-  const { todos, deleteTodo, createTodo } = useTodo();
+  const [ModalType, setModalType] = useState("");
+  const [inputs, setInputs] = useState({ id: 0, title: "", content: "" });
+  const { todos, deleteTodo, createTodo, updateTodo } = useTodo();
 
   const signout = () => {
     window.localStorage.removeItem("token");
@@ -38,7 +39,22 @@ function Todo({ setIsLogin }: any) {
                   <p className="text-sm text-gray-500">
                     작성날짜 : {todo.createdAt}
                   </p>
-                  <div className="flex">
+                  <div className="flex flex-col">
+                    <button
+                      type="button"
+                      className="font-medium text-indigo-600 hover:text-indigo-500"
+                      onClick={() => {
+                        setShowCreateModal(true);
+                        setModalType("modify");
+                        setInputs({
+                          id: todo.id,
+                          title: todo.title,
+                          content: todo.content,
+                        });
+                      }}
+                    >
+                      수정
+                    </button>
                     <button
                       type="button"
                       className="font-medium text-indigo-600 hover:text-indigo-500"
@@ -59,14 +75,19 @@ function Todo({ setIsLogin }: any) {
       <div
         onClick={() => {
           setShowCreateModal(true);
+          setModalType("create");
         }}
       >
         추가하기
       </div>
-      <CreateTodoModal
+      <TodoModal
         showCreateModal={showCreateModal}
         setShowCreateModal={setShowCreateModal}
+        inputs={inputs}
+        setInputs={setInputs}
         createTodo={createTodo}
+        updateTodo={updateTodo}
+        type={ModalType}
       />
     </>
   );
