@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
 function Main() {
+  const [isLogin, setIsLogin] = useState(window.localStorage.getItem("token"));
   const navigate = useNavigate();
 
   const goAuth = () => {
     navigate(`/auth`);
   };
 
-  return (
+  const signout = () => {
+    window.localStorage.removeItem("token");
+    setIsLogin("");
+  };
+
+  return isLogin ? (
+    <div onClick={signout}>로그아웃</div>
+  ) : (
     <div
       className="absolute transform w-96 top-1/2 left-1/2"
       style={{
