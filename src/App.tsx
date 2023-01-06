@@ -10,6 +10,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Main />} />
+        <Route path="/todo" element={<Main />} />
         <Route
           path="/auth"
           element={
