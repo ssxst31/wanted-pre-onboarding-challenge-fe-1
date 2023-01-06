@@ -6,19 +6,33 @@ export async function fetchTodos() {
   return resp.data;
 }
 
-export async function postTodo({ title, content }: any) {
+export async function postTodo({
+  title,
+  content,
+}: {
+  title: string;
+  content: string;
+}) {
   const resp = await post("/todos", { title, content });
 
   return resp.data;
 }
 
-export async function deleteTodo({ id }: any) {
+export async function deleteTodo({ id }: { id: string }) {
   const resp = await deleteCall(`/todos/${id}`);
 
   return resp.data;
 }
 
-export async function updateTodo({ id, title, content }: any) {
+export async function updateTodo({
+  id,
+  title,
+  content,
+}: {
+  id: string;
+  title: string;
+  content: string;
+}) {
   const resp = await put(`/todos/${id}`, { title, content });
 
   return resp.data;

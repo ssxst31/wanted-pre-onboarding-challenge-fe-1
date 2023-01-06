@@ -9,7 +9,7 @@ function Main() {
   const navigate = useNavigate();
   const { todos, deleteTodo, createTodo, updateTodo } = useTodo();
 
-  const [isLogin, setIsLogin] = useState<any>(
+  const [isLogin, setIsLogin] = useState<string | null>(
     window.localStorage.getItem("token")
   );
 
@@ -19,7 +19,7 @@ function Main() {
 
   const signout = () => {
     window.localStorage.removeItem("token");
-    setIsLogin(false);
+    setIsLogin(null);
     navigate(`/`);
   };
 

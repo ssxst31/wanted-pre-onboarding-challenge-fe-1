@@ -2,14 +2,20 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import queryString from "query-string";
 
-function DetailTodo({ todos }: any) {
+import { Todo } from "type";
+
+interface DetailTodoProps {
+  todos: Todo[] | null | undefined;
+}
+
+function DetailTodo({ todos }: DetailTodoProps) {
   const { search } = useLocation();
   const values = queryString.parse(search);
-  const [todo, setTodo] = useState<any>();
+  const [todo, setTodo] = useState<Todo>();
 
   useEffect(() => {
     if (todos) {
-      setTodo(todos.find((d: any) => d.id === values.todo));
+      setTodo(todos.find((todo) => todo.id === values.todo));
     }
   }, [values.todo, todos]);
 

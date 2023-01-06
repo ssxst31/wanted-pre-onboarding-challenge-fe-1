@@ -2,12 +2,30 @@ import React, { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
 interface CreateTodoModalProps {
-  showCreateModal: any;
-  setShowCreateModal: any;
-  inputs: any;
-  setInputs: any;
-  createTodo: any;
-  updateTodo: any;
+  showCreateModal: boolean;
+  setShowCreateModal: React.Dispatch<React.SetStateAction<boolean>>;
+  inputs: {
+    id: string;
+    title: string;
+    content: string;
+  };
+  setInputs: React.Dispatch<
+    React.SetStateAction<{
+      id: string;
+      title: string;
+      content: string;
+    }>
+  >;
+  createTodo: ({ title, content }: { title: string; content: string }) => void;
+  updateTodo: ({
+    id,
+    title,
+    content,
+  }: {
+    id: string;
+    title: string;
+    content: string;
+  }) => void;
   type: string;
 }
 
@@ -92,7 +110,7 @@ function CreateTodoModal({
                       isCreateType
                         ? createTodo({ title, content })
                         : updateTodo({ id, title, content });
-                      setInputs({ title: "", content: "" });
+                      setInputs({ id: 0, title: "", content: "" });
                     }}
                   >
                     {isCreateType ? "추가하기" : "수정하기"}

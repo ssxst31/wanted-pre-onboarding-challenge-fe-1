@@ -2,8 +2,23 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import TodoModal from "components/TodoModal";
+import { Todo } from "type";
+interface TodoProps {
+  todos: Todo[] | null | undefined;
+  deleteTodo: (id: number) => void;
+  createTodo: ({ title, content }: { title: string; content: string }) => void;
+  updateTodo: ({
+    id,
+    title,
+    content,
+  }: {
+    id: string;
+    title: string;
+    content: string;
+  }) => void;
+}
 
-function Todo({ todos, deleteTodo, createTodo, updateTodo }: any) {
+function Todo({ todos, deleteTodo, createTodo, updateTodo }: TodoProps) {
   const navigate = useNavigate();
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [ModalType, setModalType] = useState("");
@@ -25,7 +40,7 @@ function Todo({ todos, deleteTodo, createTodo, updateTodo }: any) {
           추가하기
         </div>
         <ul>
-          {todos.map((todo: any) => {
+          {todos.map((todo) => {
             return (
               <li
                 key={todo.id}
