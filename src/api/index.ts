@@ -24,3 +24,8 @@ export const deleteCall = (url: string, data?: any) => {
   const options = _getHeader();
   return axios.delete(url, { ...options, data });
 };
+
+export const put = (url: string, data: any) => {
+  const options = _getHeader();
+  return axios.put(url, data, options);
+};
