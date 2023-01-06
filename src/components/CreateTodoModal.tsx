@@ -84,6 +84,7 @@ function CreateTodoModal({
                     onClick={() => {
                       const { title, content } = inputs;
                       createTodo({ title, content });
+                      setInputs({ title: "", content: "" });
                     }}
                   >
                     추가하기
