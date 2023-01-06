@@ -20,8 +20,9 @@ function Main() {
   const signout = () => {
     window.localStorage.removeItem("token");
     setIsLogin(false);
+    navigate(`/`);
   };
-  console.log(todos);
+
   return isLogin ? (
     <div className="flex justify-between">
       <Todo
